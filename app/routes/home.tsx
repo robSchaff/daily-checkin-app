@@ -1,5 +1,4 @@
 import { Form } from "react-router";
-import { useEffect } from "react";
 
 const questions = [
   "Did I do my best to set clear goals?",
@@ -10,7 +9,7 @@ const questions = [
   "Did I do my best to be fully engaged?"
 ];
 
-export function Home() {
+export default function Home() {
   return (
     <div>
       <h1>Daily Check-In</h1>
@@ -50,10 +49,9 @@ export function Home() {
     localStorage.setItem("checkins", JSON.stringify(updated));
   
     console.log("💾 Saved to localStorage:", entry);
-  
     return null;
   }
 
   export async function loader() {
-    return {};
+    // satisfy Remix Router withour returning readable data
   }
