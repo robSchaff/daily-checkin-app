@@ -24,8 +24,7 @@
 // }
 
 
-import { json } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -42,9 +41,9 @@ export default function Home() {
   );
 }
 
-export const action = async ({ request }: { request: Request }) => {
+export async function action({ request }) {
   const formData = await request.formData();
   const value = formData.get("example");
   console.log("📝 Received from form:", value);
-  return json({ success: true });
-};
+  return null;
+}
