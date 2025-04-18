@@ -55,5 +55,5 @@ export function Home() {
   }
 
   export async function loader() {
-    return null; // or undefined
+    return; // or undefined
   }
