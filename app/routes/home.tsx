@@ -12,7 +12,6 @@
 //  return <Welcome />;
 //}
 
-
 import { Form } from "react-router";
 
 const questions = [
@@ -58,11 +57,5 @@ export async function action({ request }) {
   }
 
   console.log("📝 Received scores:", scores);
-  return null;
-}
-export async function action({ request }) {
-  const formData = await request.formData();
-  const value = formData.get("example");
-  console.log("📝 Received from form:", value);
   return null;
 }
