@@ -1,5 +1,4 @@
 import { Form } from "react-router";
-import { json } from "react"
 import { useEffect } from "react";
 
 const questions = [
@@ -56,5 +55,5 @@ export function Home() {
   }
 
   export async function loader() {
-    return json({});
+    return new Response(null, { status: 204 }); // No Content
   }
