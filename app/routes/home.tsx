@@ -55,5 +55,5 @@ export function Home() {
   }
 
   export async function loader() {
-    return; // or undefined
+    return json({});
   }
