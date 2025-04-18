@@ -165,3 +165,4 @@ export function Home() {
 
 export async function loader() {
   return {};
+}
