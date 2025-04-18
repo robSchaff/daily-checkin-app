@@ -3,7 +3,7 @@
 
 const questions = [
   "Did I do my best to set clear goals?",
-  "Did I do my best to make progress toward goal achievement?",
+  "Did I do my best to make progress toward my goals?",
   "Did I do my best to be happy?",
   "Did I do my best to find meaning?",
   "Did I do my best to build positive relationships?",
@@ -34,7 +34,18 @@ export default function Home() {
       }}
     >
     <div style={{ textAlign: "center" }}>
-      <h1>Daily Check-In</h1>
+      <h1
+        style={{
+        marginBottom: "1.5rem",
+        fontSize: "2rem",
+        fontWeight: 700,
+        color: "#1e3a8a", // Indigo-900
+        textAlign: "center",
+        letterSpacing: "-0.5px",
+        }}
+      >
+      Daily Check-In
+    </h1>
     </div>
       <Form method="post">
         {questions.map((q, i) => (
@@ -56,7 +67,7 @@ export default function Home() {
           <button
             type="submit"
             style={{
-            backgroundColor: "#4f46e5",
+            backgroundColor: "#1e3a8a", // Indigo-900
             color: "white",
             padding: "0.75rem 1.5rem",
             fontSize: "1rem",
@@ -70,7 +81,7 @@ export default function Home() {
               (e.currentTarget.style.backgroundColor = "#4338ca")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "#4f46e5")
+              (e.currentTarget.style.backgroundColor = "#1e3a8a")
             }
           >
           Submit Check-In
