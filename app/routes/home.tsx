@@ -14,7 +14,7 @@
 
 
 // last working version
-/*
+
  
 import { Form } from "react-router";
 
@@ -63,8 +63,10 @@ export async function action({ request }) {
   console.log("📝 Received scores:", scores);
   return null;
 }  
-*/
 
+
+
+/*
 import { Form, useActionData } from "react-router";
 import { useEffect } from "react";
 
@@ -130,3 +132,5 @@ export async function action({ request }: { request: Request }) {
 export async function loader() {
   return null;
 }
+
+*/
