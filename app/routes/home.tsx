@@ -13,12 +13,38 @@
 //}
 
 
+// this was my first test code
+// export default function Home() {
+//   return (
+//     <div>
+//       <h1>Daily Check-In</h1>
+//       <p>This is the start of something new.</p>
+//     </div>
+//   );
+// }
+
+
+import { json } from "@remix-run/node";
+import { Form } from "@remix-run/react";
 
 export default function Home() {
   return (
     <div>
       <h1>Daily Check-In</h1>
-      <p>This is the start of something new.</p>
+      <Form method="post">
+        <label>
+          Example Input:
+          <input type="text" name="example" />
+        </label>
+        <button type="submit">Submit</button>
+      </Form>
     </div>
   );
 }
+
+export const action = async ({ request }: { request: Request }) => {
+  const formData = await request.formData();
+  const value = formData.get("example");
+  console.log("📝 Received from form:", value);
+  return json({ success: true });
+};
