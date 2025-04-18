@@ -50,10 +50,11 @@ export default function Home() {
           </div>
         ))}
 
-        <button
-          type="submit"
-          style={{
-            backgroundColor: "#4f46e5", // Indigo-600
+        <div style={{ textAlign: "center" }}>
+          <button
+            type="submit"
+            style={{
+            backgroundColor: "#4f46e5",
             color: "white",
             padding: "0.75rem 1.5rem",
             fontSize: "1rem",
@@ -62,13 +63,17 @@ export default function Home() {
             cursor: "pointer",
             boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
             transition: "background-color 0.3s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#4338ca")} // Indigo-700
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#4f46e5")} // Indigo-600
-        >
-        Submit Check-In
-        </button>
-
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "#4338ca")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "#4f46e5")
+            }
+          >
+          Submit Check-In
+          </button>
+        </div>
       </Form>
     </div>
     </div>
