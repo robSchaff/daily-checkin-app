@@ -18,7 +18,6 @@
  
 //import { Form } from "react-router";
 import { Form, useActionData } from "react-router";
-import { json } from "react-router";
 import { useEffect } from "react";
 
 const questions = [
@@ -165,5 +164,4 @@ export function Home() {
 */
 
 export async function loader() {
-  return json({});
-}
+  return {};
