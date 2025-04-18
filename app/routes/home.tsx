@@ -9,7 +9,7 @@ const questions = [
   "Did I do my best to be fully engaged?"
 ];
 
-export default function Home() {
+export function Home() {
   return (
     <div>
       <h1>Daily Check-In</h1>
