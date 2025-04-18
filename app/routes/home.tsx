@@ -16,7 +16,9 @@
 // last working version
 
  
-import { Form } from "react-router";
+//import { Form } from "react-router";
+import { Form, useActionData } from "react-router";
+import { useEffect } from "react";
 
 const questions = [
   "Did I do my best to set clear goals?",
