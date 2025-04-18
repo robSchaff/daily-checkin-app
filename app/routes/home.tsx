@@ -53,3 +53,7 @@ export function Home() {
   
     return null;
   }
+
+  export async function loader() {
+    return null; // or undefined
+  }
