@@ -126,3 +126,7 @@ export async function action({ request }: { request: Request }) {
   console.log("📝 Received scores:", scores);
   return { scores }; // Pass data back to client
 }
+
+export async function loader() {
+  return null;
+}
