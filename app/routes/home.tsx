@@ -33,7 +33,9 @@ export default function Home() {
         width: "100%",
       }}
     >
+    <div style={{ textAlign: "center" }}>
       <h1>Daily Check-In</h1>
+    </div>
       <Form method="post">
         {questions.map((q, i) => (
           <div key={i} style={{ marginBottom: "1rem" }}>
