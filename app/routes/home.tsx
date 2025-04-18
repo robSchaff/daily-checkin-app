@@ -131,8 +131,9 @@ export async function action({ request }: { request: Request }) {
   return { scores }; // Pass data back to client
 }
 
+*/
+
 export async function loader() {
   return null;
 }
 
-*/
