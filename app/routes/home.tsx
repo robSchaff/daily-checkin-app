@@ -12,7 +12,27 @@ const questions = [
 
 export default function Home() {
   return (
-    <div>
+    <div
+    style={{
+      backgroundColor: "#f9fafb", // soft gray
+      minHeight: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontFamily: "'Segoe UI', Roboto, Helvetica, sans-serif",
+      padding: "2rem",
+    }}
+  >
+    <div
+      style={{
+        backgroundColor: "white",
+        padding: "2rem 3rem",
+        borderRadius: "1rem",
+        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+        maxWidth: "500px",
+        width: "100%",
+      }}
+    >
       <h1>Daily Check-In</h1>
       <Form method="post">
         {questions.map((q, i) => (
@@ -48,8 +68,9 @@ export default function Home() {
         >
         Submit Check-In
         </button>
-        
+
       </Form>
+    </div>
     </div>
   );
 }
