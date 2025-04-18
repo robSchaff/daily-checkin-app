@@ -34,6 +34,7 @@ export function Home() {
       </Form>
     </div>
   );
+}
   
   export async function clientAction({ request }: { request: Request }) {
     const formData = await request.formData();
@@ -52,4 +53,3 @@ export function Home() {
   
     return null;
   }
-}
