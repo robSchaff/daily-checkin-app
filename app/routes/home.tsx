@@ -58,4 +58,4 @@ export async function action({ request }) {
 
   console.log("📝 Received scores:", scores);
   return null;
-}
+}  
