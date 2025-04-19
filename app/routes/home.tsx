@@ -1,7 +1,7 @@
  import { Form } from "react-router";
  import { useState } from "react";
  import type { CSSProperties } from "react";
- 
+
  // Define types
  interface QuestionProps {
   question: string;
@@ -73,22 +73,29 @@ const styles: Record<string, CSSProperties> = {
   }
 };
 
-// Extracted Question component
+// Extracted Question component - updated to Sliders with help from ChatGPT
 function Question({ question, index, value, onChange }: QuestionProps) {
   return (
     <div style={styles.questionContainer}>
-      <label>
+      <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500 }}>
         {question}
-        <input
-          type="number"
-          name={`q${index}`}
-          min="1"
-          max="10"
-          value={value || ""}
-          onChange={(e) => onChange(index, parseInt(e.target.value) || 0)}
-          style={styles.input}
-        />
       </label>
+      <input
+        type="range"
+        name={`q${index}`}
+        min="1"
+        max="5"
+        value={value}
+        onChange={(e) => onChange(index, parseInt(e.target.value))}
+        style={{
+          width: "100%",
+          marginTop: "0.5rem",
+          accentColor: "#4f46e5",
+        }}
+      />
+      <div style={{ textAlign: "right", fontSize: "0.875rem", color: "#374151" }}>
+        {value ? `Selected: ${value}` : "No selection"}
+      </div>
     </div>
   );
 }
@@ -114,8 +121,8 @@ function SubmitButton() {
 
 export default function Home() {
   // State to manage form values
-  const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(0));
-
+  const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(3)); // default to midpoint
+  
   // Update individual score
   const handleScoreChange = (index: number, value: number) => {
     const newScores = [...scores];
