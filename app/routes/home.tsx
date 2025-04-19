@@ -122,7 +122,7 @@ function SubmitButton() {
 export default function Home() {
   // State to manage form values
   const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(3)); // default to midpoint
-  
+
   // Update individual score
   const handleScoreChange = (index: number, value: number) => {
     const newScores = [...scores];
@@ -150,6 +150,20 @@ export default function Home() {
           <div style={styles.buttonContainer}>
             <SubmitButton />
           </div>
+          
+          <div style={{ textAlign: "center", marginTop: "1rem" }}>
+            <a
+              href="/history"
+              style={{
+              fontSize: "0.9rem",
+              color: "#4f46e5",
+              textDecoration: "none",
+              }}
+            >
+            📊 View History
+            </a>
+          </div>
+
         </Form>
       </div>
     </div>
