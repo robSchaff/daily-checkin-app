@@ -1,7 +1,17 @@
-// last working version
  import { Form } from "react-router";
+ import { useState } from "react";
+ import type { CSSProperties } from "react";
+ 
+ // Define types
+ interface QuestionProps {
+  question: string;
+  index: number;
+  value: number;
+  onChange: (index : number, value: number) => void;
+ }
 
-const questions = [
+ // Constants
+const QUESTIONS = [
   "Did I do my best to set clear goals?",
   "Did I do my best to make progress toward my goals?",
   "Did I do my best to be happy?",
@@ -10,85 +20,131 @@ const questions = [
   "Did I do my best to be fully engaged?"
 ];
 
-export default function Home() {
-  return (
-    <div
-    style={{
-      backgroundColor: "#f9fafb", // soft gray
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontFamily: "'Segoe UI', Roboto, Helvetica, sans-serif",
-      padding: "2rem",
-    }}
-  >
-    <div
-      style={{
-        backgroundColor: "white",
-        padding: "2rem 3rem",
-        borderRadius: "1rem",
-        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-        maxWidth: "500px",
-        width: "100%",
-      }}
-    >
-    <div style={{ textAlign: "center" }}>
-      <h1
-        style={{
-        marginBottom: "1.5rem",
-        fontSize: "2rem",
-        fontWeight: 700,
-        color: "#1e3a8a", // Indigo-900
-        textAlign: "center",
-        letterSpacing: "-0.5px",
-        }}
-      >
-      Daily Check-In
-    </h1>
-    </div>
-      <Form method="post">
-        {questions.map((q, i) => (
-          <div key={i} style={{ marginBottom: "1rem" }}>
-            <label>
-              {q}
-              <input
-                type="number"
-                name={`q${i}`}
-                min="1"
-                max="10"
-                style={{ marginLeft: "1rem", width: "50px" }}
-              />
-            </label>
-          </div>
-        ))}
+// Styles separated as objects
+const styles: Record<string, CSSProperties> = {
+  container: {
+    backgroundColor: "#f9fafb",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "'Segoe UI', Roboto, Helvetica, sans-serif",
+    padding: "2rem",
+  },
+  card: {
+    backgroundColor: "white",
+    padding: "2rem 3rem",
+    borderRadius: "1rem",
+    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+    maxWidth: "500px",
+    width: "100%",
+  },
+  header: {
+    textAlign: "center" as const, // Use "as const" to specify literal type
+  },
+  title: {
+    marginBottom: "1.5rem",
+    fontSize: "2rem",
+    fontWeight: 700,
+    color: "#1e3a8a",
+    textAlign: "center" as const,
+    letterSpacing: "-0.5px",
+  },
+  questionContainer: {
+    marginBottom: "1rem",
+  },
+  input: {
+    marginLeft: "1rem",
+    width: "50px",
+  },
+  buttonContainer: {
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#1e3a8a",
+    color: "white",
+    padding: "0.75rem 1.5rem",
+    fontSize: "1rem",
+    border: "none",
+    borderRadius: "0.5rem",
+    cursor: "pointer",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+    transition: "background-color 0.3s",
+  }
+};
 
-        <div style={{ textAlign: "center" }}>
-          <button
-            type="submit"
-            style={{
-            backgroundColor: "#1e3a8a", // Indigo-900
-            color: "white",
-            padding: "0.75rem 1.5rem",
-            fontSize: "1rem",
-            border: "none",
-            borderRadius: "0.5rem",
-            cursor: "pointer",
-            boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
-            transition: "background-color 0.3s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "#4338ca")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "#1e3a8a")
-            }
-          >
-          Submit Check-In
-          </button>
-        </div>
-      </Form>
+// Extracted Question component
+function Question({ question, index, value, onChange }: QuestionProps) {
+  return (
+    <div style={styles.questionContainer}>
+      <label>
+        {question}
+        <input
+          type="number"
+          name={`q${index}`}
+          min="1"
+          max="10"
+          value={value || ""}
+          onChange={(e) => onChange(index, parseInt(e.target.value) || 0)}
+          style={styles.input}
+        />
+      </label>
     </div>
+  );
+}
+
+// Button component with hover functionality
+function SubmitButton() {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <button
+      type="submit"
+      style={{
+        ...styles.button,
+        backgroundColor: isHovered ? "#4338ca" : "#1e3a8a",
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      Submit Check-In
+    </button>
+  );
+}
+
+export default function Home() {
+  // State to manage form values
+  const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(0));
+
+  // Update individual score
+  const handleScoreChange = (index: number, value: number) => {
+    const newScores = [...scores];
+    newScores[index] = value;
+    setScores(newScores);
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <div style={styles.header}>
+          <h1 style={styles.title}>Daily Check-In</h1>
+        </div>
+        <Form method="post">
+          {QUESTIONS.map((question, index) => (
+            <Question
+              key={index}
+              question={question}
+              index={index}
+              value={scores[index]}
+              onChange={handleScoreChange}
+            />
+          ))}
+
+          <div style={styles.buttonContainer}>
+            <SubmitButton />
+          </div>
+        </Form>
+      </div>
     </div>
   );
 }
@@ -97,10 +153,10 @@ export async function action({ request }) {
   const formData = await request.formData();
   const scores = [];
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < QUESTIONS.length; i++) {
     scores.push(formData.get(`q${i}`));
   }
 
   console.log("📝 Received scores:", scores);
   return null;
-}  
+}
