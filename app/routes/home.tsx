@@ -123,6 +123,12 @@ export default function Home() {
   // State to manage form values
   const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(3)); // default to midpoint
 
+  const today = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   // Update individual score
   const handleScoreChange = (index: number, value: number) => {
     const newScores = [...scores];
@@ -135,7 +141,11 @@ export default function Home() {
       <div style={styles.card}>
         <div style={styles.header}>
           <h1 style={styles.title}>Daily Check-In</h1>
+          <p style={{ marginTop: "-0.5rem", color: "#6b7280", fontSize: "0.95rem" }}>
+            {today}
+          </p>
         </div>
+        
         <Form method="post">
           {QUESTIONS.map((question, index) => (
             <Question
