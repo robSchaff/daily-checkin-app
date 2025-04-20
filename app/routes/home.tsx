@@ -146,7 +146,19 @@ export default function Home() {
           </p>
         </div>
         
-        <Form method="post">
+        <Form
+          method="post"
+          onSubmit={() => {
+          const entry = {
+            date: new Date().toISOString().split("T")[0],
+            scores,
+          };
+          const existing = JSON.parse(localStorage.getItem("checkins") || "[]");
+          const updated = [...existing, entry];
+          localStorage.setItem("checkins", JSON.stringify(updated));
+          console.log("💾 Saved to localStorage:", entry);
+          }}
+>
           {QUESTIONS.map((question, index) => (
             <Question
               key={index}
