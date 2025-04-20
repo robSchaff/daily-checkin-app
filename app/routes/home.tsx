@@ -77,7 +77,13 @@ const styles: Record<string, CSSProperties> = {
 function Question({ question, index, value, onChange }: QuestionProps) {
   return (
     <div style={styles.questionContainer}>
-      <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500 }}>
+      <label style={{ 
+        display: "block", 
+        marginBottom: "0.25rem", 
+        fontWeight: 500,
+        color: "#1f2937"  // slate-800 or pick another readable color
+        }}
+      >        
         {question}
         <input
           type="range"
@@ -150,17 +156,20 @@ export default function Home() {
         
         <Form
           method="post"
-          onSubmit={() => {
-          const entry = {
-            date: new Date().toISOString().split("T")[0],
-            scores,
-          };
-          const existing = JSON.parse(localStorage.getItem("checkins") || "[]");
-          const updated = [...existing, entry];
-          localStorage.setItem("checkins", JSON.stringify(updated));
-          console.log("💾 Saved to localStorage:", entry);
+          onSubmit={(e) => {
+            e.preventDefault(); // 🛑 prevent form from reloading the page
+          
+            const entry = {
+              date: new Date().toLocaleDateString("en-CA"),
+              scores,
+            };
+            const existing = JSON.parse(localStorage.getItem("checkins") || "[]");
+            const updated = [...existing, entry];
+            localStorage.setItem("checkins", JSON.stringify(updated));
+            console.log("💾 Saved to localStorage:", entry);
           }}
->
+          >
+
           {QUESTIONS.map((question, index) => (
             <Question
               key={index}
