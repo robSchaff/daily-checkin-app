@@ -192,9 +192,12 @@ export default function Home() {
   );
 }
 
-// commenting out because we aren't doing any server side action
-// right now
-// export async function action({ request }) {
+
+export async function action() {
+  return null;
+}
+
+//export async function action({ request }) {
 //   const formData = await request.formData();
 //   const scores = [];
 //
