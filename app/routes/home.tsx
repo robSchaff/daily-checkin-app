@@ -192,14 +192,16 @@ export default function Home() {
   );
 }
 
-export async function action({ request }) {
-  const formData = await request.formData();
-  const scores = [];
-
-  for (let i = 0; i < QUESTIONS.length; i++) {
-    scores.push(formData.get(`q${i}`));
-  }
-
-  console.log("📝 Received scores:", scores);
-  return null;
-}
+// commenting out because we aren't doing any server side action
+// right now
+// export async function action({ request }) {
+//   const formData = await request.formData();
+//   const scores = [];
+//
+//   for (let i = 0; i < QUESTIONS.length; i++) {
+//     scores.push(formData.get(`q${i}`));
+//  }
+//
+//  console.log("📝 Received scores:", scores);
+//  return null;
+//}
