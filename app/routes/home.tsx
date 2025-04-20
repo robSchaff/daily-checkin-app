@@ -79,20 +79,20 @@ function Question({ question, index, value, onChange }: QuestionProps) {
     <div style={styles.questionContainer}>
       <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500 }}>
         {question}
+        <input
+          type="range"
+          name={`q${index}`}
+          min="1"
+          max="5"
+          value={value}
+          onChange={(e) => onChange(index, parseInt(e.target.value))}
+          style={{
+            width: "100%",
+            marginTop: "0.5rem",
+            accentColor: "#4f46e5",
+          }}
+        />
       </label>
-      <input
-        type="range"
-        name={`q${index}`}
-        min="1"
-        max="5"
-        value={value}
-        onChange={(e) => onChange(index, parseInt(e.target.value))}
-        style={{
-          width: "100%",
-          marginTop: "0.5rem",
-          accentColor: "#4f46e5",
-        }}
-      />
       <div style={{ textAlign: "right", fontSize: "0.875rem", color: "#374151" }}>
         {value ? `Selected: ${value}` : "No selection"}
       </div>
@@ -122,6 +122,8 @@ function SubmitButton() {
 export default function Home() {
   // State to manage form values
   const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(3)); // default to midpoint
+  
+  console.log("📊 Current scores state:", scores);
 
   const today = new Date().toLocaleDateString("en-US", {
     year: "numeric",
