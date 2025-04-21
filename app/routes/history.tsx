@@ -12,7 +12,9 @@ export default function History() {
     const stored = localStorage.getItem("checkins");
     if (stored) {
       try {
-        setCheckins(JSON.parse(stored));
+        const parsed: Checkin[] = JSON.parse(stored);
+        parsed.sort((a, b) => b.date.localeCompare(a.date)); // 🔁 newest first
+        setCheckins(parsed);
       } catch (err) {
         console.error("Failed to parse checkins from localStorage:", err);
       }
@@ -45,9 +47,14 @@ export default function History() {
           📊 Your Check-In History
         </h1>
 
+        <p style={{ marginBottom: "1rem", color: "#4b5563" }}>
+           You’ve checked in <strong>{checkins.length}</strong> {checkins.length === 1 ? "time" : "times"}.
+          </p>
+
         {checkins.length === 0 ? (
           <p>No check-ins yet.</p>
         ) : (
+
           <ul style={{ listStyle: "none", padding: 0 }}>
             {checkins.map((entry, idx) => (
               <li
