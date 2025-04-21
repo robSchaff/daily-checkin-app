@@ -12,9 +12,24 @@ export default function History() {
     const stored = localStorage.getItem("checkins");
     if (stored) {
       try {
+        // Parse the stored check-ins from localStorage
         const parsed: Checkin[] = JSON.parse(stored);
-        parsed.sort((a, b) => b.date.localeCompare(a.date)); // 🔁 newest first
-        setCheckins(parsed);
+
+        // Create a Set to track which dates we've already seen
+        const seen = new Set<string>();
+
+        // Reverse the array to prioritize the most recent entries first
+        const unique = parsed
+          .reverse() // latest entries now come first
+          .filter((entry) => {
+            if (seen.has(entry.date)) return false; // skip if we've already added this date
+            seen.add(entry.date); // mark this date as seen
+            return true; // keep this entry
+           })
+          .reverse(); // reverse again so newest check-ins are back at the top
+
+        // Store the filtered, sorted entries
+        setCheckins(unique);
       } catch (err) {
         console.error("Failed to parse checkins from localStorage:", err);
       }
