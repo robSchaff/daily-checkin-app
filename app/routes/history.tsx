@@ -66,10 +66,11 @@ function CheckinTable({ checkins }: { checkins: Checkin[] }) {
               borderTop: "1px solid #e5e7eb",
             }}
           >
-            <td style={{ padding: "0.5rem 0", color: "#374151" }}>{entry.date}</td>
+            <td data-label="Date" style={{ padding: "0.5rem 0", color: "#374151" }}>{entry.date}</td>
             {entry.scores.map((score, i) => (
               <td
                 key={i}
+                data-label={CATEGORIES[i]}
                 style={{
                   width: "12%",
                   textAlign: "center",
@@ -128,7 +129,9 @@ export default function History() {
           <p>No check-ins yet.</p>
         ) : (
 
-          <CheckinTable checkins={checkins} />
+          <div style={{ overflowX: "auto" }}>
+            <CheckinTable checkins={checkins} />
+          </div>
         )}
 
         <div style={{ marginBottom: "1rem" }}>
