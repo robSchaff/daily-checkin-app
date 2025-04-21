@@ -98,8 +98,14 @@ export default function History() {
               </tr>
             </thead>
             <tbody>
-              {checkins.map((entry) => (
-                <tr key={entry.date} style={{ borderTop: "1px solid #e5e7eb" }}>
+              {checkins.map((entry, idx) => (  
+                <tr
+                  key={entry.date}
+                  style={{
+                    backgroundColor: idx % 2 === 0 ? "#f9fafb" : "white", // zebra striping
+                    borderTop: "1px solid #e5e7eb",
+                  }}
+                >  
                   <td style={{ padding: "0.5rem 0", color: "#374151" }}>{entry.date}</td>
                   {entry.scores.map((score, i) => (
                     <td
