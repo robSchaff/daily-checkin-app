@@ -128,9 +128,8 @@ function SubmitButton() {
 export default function Home() {
   // State to manage form values
   const [scores, setScores] = useState<number[]>(Array(QUESTIONS.length).fill(3)); // default to midpoint
+  const [saved, setSaved] = useState(false);  
   
-  console.log("📊 Current scores state:", scores);
-
   const today = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -166,9 +165,11 @@ export default function Home() {
             const existing = JSON.parse(localStorage.getItem("checkins") || "[]");
             const updated = [...existing, entry];
             localStorage.setItem("checkins", JSON.stringify(updated));
-            console.log("💾 Saved to localStorage:", entry);
+
+            setSaved(true);
+            setTimeout(() => setSaved(false), 2500); // clears after 2.5 seconds
           }}
-          >
+        >
 
           {QUESTIONS.map((question, index) => (
             <Question
@@ -182,6 +183,11 @@ export default function Home() {
 
           <div style={styles.buttonContainer}>
             <SubmitButton />
+            {saved && (
+              <p style={{ color: "#10b981", marginTop: "0.5rem", textAlign: "center" }}>
+                ✔️ Check-in saved!
+              </p>
+            )}
           </div>
           
           <div style={{ textAlign: "center", marginTop: "1rem" }}>
@@ -207,15 +213,3 @@ export default function Home() {
 export async function action() {
   return null;
 }
-
-//export async function action({ request }) {
-//   const formData = await request.formData();
-//   const scores = [];
-//
-//   for (let i = 0; i < QUESTIONS.length; i++) {
-//     scores.push(formData.get(`q${i}`));
-//  }
-//
-//  console.log("📝 Received scores:", scores);
-//  return null;
-//}
