@@ -5,7 +5,7 @@ const CATEGORIES = [
   "Progress",
   "Happy",
   "Meaning",
-  "Relationships",
+  "Social",
   "Engaged"
 ];
 
@@ -84,7 +84,15 @@ export default function History() {
               <tr>
                 <th style={{ textAlign: "left", paddingBottom: "0.5rem", color: "#1e3a8a" }}>Date</th>
                 {CATEGORIES.map((cat) => (
-                  <th key={cat} style={{ textAlign: "center", paddingBottom: "0.5rem", color: "#4b5563" }}>
+                  <th
+                    key={cat}
+                    style={{
+                      width: "12%", // 6 columns = ~84%, gives room for the date column
+                      textAlign: "center",
+                      paddingBottom: "0.5rem",
+                      color: "#4b5563",
+                    }}
+                  >
                     {cat}
                   </th>
                 ))}
@@ -95,7 +103,16 @@ export default function History() {
                 <tr key={entry.date} style={{ borderTop: "1px solid #e5e7eb" }}>
                   <td style={{ padding: "0.5rem 0", color: "#374151" }}>{entry.date}</td>
                   {entry.scores.map((score, i) => (
-                    <td key={i} style={{ textAlign: "center", color: "#111827" }}>{score}</td>
+                    <td
+                      key={i}
+                      style={{
+                        width: "12%",
+                        textAlign: "center",
+                        color: "#111827",
+                      }}
+                    >
+                    {score}
+                    </td>
                   ))}
                 </tr>
               ))}
