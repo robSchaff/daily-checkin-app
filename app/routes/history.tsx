@@ -34,8 +34,7 @@ export default function History() {
             if (seen.has(entry.date)) return false; // skip if we've already added this date
             seen.add(entry.date); // mark this date as seen
             return true; // keep this entry
-           })
-          .reverse(); // reverse again so newest check-ins are back at the top
+           });
 
         // Store the filtered, sorted entries
         setCheckins(unique);
