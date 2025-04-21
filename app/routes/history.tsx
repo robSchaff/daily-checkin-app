@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
 
+const CATEGORIES = [
+  "Goals",
+  "Progress",
+  "Happy",
+  "Meaning",
+  "Relationships",
+  "Engaged"
+];
+
 interface Checkin {
   date: string;
   scores: number[];
@@ -70,23 +79,28 @@ export default function History() {
           <p>No check-ins yet.</p>
         ) : (
 
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {checkins.map((entry, idx) => (
-              <li
-                key={idx}
-                style={{
-                  marginBottom: "1.25rem",
-                  borderBottom: "1px solid #e5e7eb",
-                  paddingBottom: "1rem",
-                }}
-              >
-                <strong style={{ color: "#374151" }}>{entry.date}</strong>
-                <div style={{ fontSize: "0.95rem", color: "#4b5563", marginTop: "0.25rem" }}>
-                  Scores: {entry.scores.join(", ")}
-                </div>
-              </li>
-            ))}
-          </ul>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "left", paddingBottom: "0.5rem", color: "#1e3a8a" }}>Date</th>
+                {CATEGORIES.map((cat) => (
+                  <th key={cat} style={{ textAlign: "center", paddingBottom: "0.5rem", color: "#4b5563" }}>
+                    {cat}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {checkins.map((entry) => (
+                <tr key={entry.date} style={{ borderTop: "1px solid #e5e7eb" }}>
+                  <td style={{ padding: "0.5rem 0", color: "#374151" }}>{entry.date}</td>
+                  {entry.scores.map((score, i) => (
+                    <td key={i} style={{ textAlign: "center", color: "#111827" }}>{score}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </div>
