@@ -118,6 +118,19 @@ export default function History() {
             </tbody>
           </table>
         )}
+
+        <div style={{ marginBottom: "1rem" }}>
+          <a
+            href="/"
+                style={{
+                color: "#4f46e5",
+              textDecoration: "none",
+              fontSize: "0.9rem",
+              }}
+          >
+            ← Back to Check-In
+          </a>
+        </div>
       </div>
     </div>
   );
